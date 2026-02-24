@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
-  final int counter;           // ← Receive from Profile (from Home!)
-  final VoidCallback onReset;  // ← Receive from Profile (from Home!)
+  final int counter; // ← Receive from Profile (from Home!)
+  final VoidCallback onReset; // ← Receive from Profile (from Home!)
 
-  const SettingsPage({
-    super.key,
-    required this.counter,
-    required this.onReset,
-  });
+  const SettingsPage({super.key, required this.counter, required this.onReset});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
+      appBar: AppBar(title: const Text('Settings')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

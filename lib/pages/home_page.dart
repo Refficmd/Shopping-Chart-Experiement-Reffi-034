@@ -52,10 +52,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Counter: $_counter',
-              style: const TextStyle(fontSize: 32),
-            ),
+            Text('Counter: $_counter', style: const TextStyle(fontSize: 32)),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _increment,
@@ -68,8 +65,8 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ProfilePage(
-                      counter: _counter,      // ← Pass counter
-                      onReset: _reset,        // ← Pass callback
+                      counter: _counter, // ← Pass counter
+                      onReset: _reset, // ← Pass callback
                     ),
                   ),
                 );

@@ -31,7 +31,8 @@ class CartPage extends StatelessWidget {
                       builder: (_) => AlertDialog(
                         title: const Text("Hapus Semua?"),
                         content: const Text(
-                            "Yakin mau hapus semua item di keranjang?"),
+                          "Yakin mau hapus semua item di keranjang?",
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context),
@@ -48,7 +49,7 @@ class CartPage extends StatelessWidget {
                       ),
                     );
                   },
-          )
+          ),
         ],
       ),
       body: cart.items.isEmpty
@@ -79,8 +80,7 @@ class CartPage extends StatelessWidget {
 
                               Expanded(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       item.product.name,
@@ -89,9 +89,7 @@ class CartPage extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 4),
-                                    Text(
-                                      rupiah.format(item.product.price),
-                                    ),
+                                    Text(rupiah.format(item.product.price)),
                                     const SizedBox(height: 4),
                                     Text(
                                       "Subtotal: ${rupiah.format(item.product.price * item.quantity)}",
@@ -115,7 +113,8 @@ class CartPage extends StatelessWidget {
                                   Text(
                                     item.quantity.toString(),
                                     style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                   IconButton(
                                     icon: const Icon(Icons.add),
@@ -137,14 +136,14 @@ class CartPage extends StatelessWidget {
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(24)),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(24),
+                    ),
                   ),
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
                             "Total:",
@@ -176,10 +175,10 @@ class CartPage extends StatelessWidget {
                           },
                           child: const Text("Checkout"),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
     );
@@ -200,10 +199,7 @@ class CartPage extends StatelessWidget {
             const SizedBox(height: 20),
             const Text(
               "Yahh, keranjang kamu kosong 😔",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             const Text(
@@ -220,7 +216,7 @@ class CartPage extends StatelessWidget {
                 },
                 child: const Text("Lanjut Belanja"),
               ),
-            )
+            ),
           ],
         ),
       ),

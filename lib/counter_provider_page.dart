@@ -11,9 +11,7 @@ class CounterProviderPage extends StatelessWidget {
     print('🔴 CounterProviderPage build'); // We'll see this ONCE
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Counter with Provider'),
-      ),
+      appBar: AppBar(title: const Text('Counter with Provider')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

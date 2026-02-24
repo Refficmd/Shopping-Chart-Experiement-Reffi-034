@@ -29,9 +29,7 @@ class _CounterPageState extends State<CounterPage> {
     print('CounterPage rebuilt!'); // ← We'll see this print
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Counter with setState'),
-      ),
+      appBar: AppBar(title: const Text('Counter with setState')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -58,10 +56,7 @@ class _CounterPageState extends State<CounterPage> {
                   child: const Text('Increment'),
                 ),
                 const SizedBox(width: 16),
-                ElevatedButton(
-                  onPressed: _reset,
-                  child: const Text('Reset'),
-                ),
+                ElevatedButton(onPressed: _reset, child: const Text('Reset')),
               ],
             ),
           ],

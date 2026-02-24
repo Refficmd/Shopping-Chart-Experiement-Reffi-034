@@ -3,29 +3,20 @@ import 'package:flutter/material.dart';
 import 'settings_page.dart';
 
 class ProfilePage extends StatelessWidget {
-  final int counter;           // ← Receive from HomePage
-  final VoidCallback onReset;  // ← Receive callback
+  final int counter; // ← Receive from HomePage
+  final VoidCallback onReset; // ← Receive callback
 
-  const ProfilePage({
-    super.key,
-    required this.counter,
-    required this.onReset,
-  });
+  const ProfilePage({super.key, required this.counter, required this.onReset});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
+      appBar: AppBar(title: const Text('Profile')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const CircleAvatar(
-              radius: 50,
-              child: Icon(Icons.person, size: 50),
-            ),
+            const CircleAvatar(radius: 50, child: Icon(Icons.person, size: 50)),
             const SizedBox(height: 20),
             const Text(
               'User Profile',
@@ -43,8 +34,8 @@ class ProfilePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SettingsPage(
-                      counter: counter,    // ← Pass again!
-                      onReset: onReset,    // ← Pass again!
+                      counter: counter, // ← Pass again!
+                      onReset: onReset, // ← Pass again!
                     ),
                   ),
                 );

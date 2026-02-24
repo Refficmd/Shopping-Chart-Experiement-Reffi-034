@@ -10,8 +10,8 @@ class CounterModel extends ChangeNotifier {
 
   // 3. Public methods to modify state
   void increment() {
-    _count++;                // Modify state
-    notifyListeners();       // ← CRUCIAL! Notify all listeners
+    _count++; // Modify state
+    notifyListeners(); // ← CRUCIAL! Notify all listeners
   }
 
   void decrement() {
