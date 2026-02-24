@@ -20,9 +20,39 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Keranjang Kamu"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete_outline),
+            onPressed: cart.items.isEmpty
+                ? null
+                : () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: const Text("Hapus Semua?"),
+                        content: const Text(
+                            "Yakin mau hapus semua item di keranjang?"),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text("Batal"),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              cart.clearCart();
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Ya"),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+          )
+        ],
       ),
       body: cart.items.isEmpty
-          ? const Center(child: Text("Wah, Keranjang Kamu Kosong nih. Ayo belanja dulu"))
+          ? _buildEmptyState(context)
           : Column(
               children: [
                 Expanded(
@@ -33,30 +63,67 @@ class CartPage extends StatelessWidget {
                       final item = cart.items[index];
 
                       return Card(
-                        child: ListTile(
-                          leading: Text(
-                            item.product.emoji,
-                            style: const TextStyle(fontSize: 28),
-                          ),
-                          title: Text(item.product.name),
-                          subtitle: Text(
-                            rupiah.format(item.product.price),
-                          ),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        margin: const EdgeInsets.only(bottom: 12),
+                        child: Padding(
+                          padding: const EdgeInsets.all(14),
+                          child: Row(
                             children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove),
-                                onPressed: () {
-                                  cart.decreaseQuantity(item.product);
-                                },
+                              Text(
+                                item.product.emoji,
+                                style: const TextStyle(fontSize: 32),
                               ),
-                              Text(item.quantity.toString()),
-                              IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed: () {
-                                  cart.increaseQuantity(item.product);
-                                },
+                              const SizedBox(width: 16),
+
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.product.name,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      rupiah.format(item.product.price),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      "Subtotal: ${rupiah.format(item.product.price * item.quantity)}",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.remove),
+                                    onPressed: () {
+                                      cart.decreaseQuantity(item.product);
+                                    },
+                                  ),
+                                  Text(
+                                    item.quantity.toString(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.add),
+                                    onPressed: () {
+                                      cart.increaseQuantity(item.product);
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -68,23 +135,29 @@ class CartPage extends StatelessWidget {
 
                 Container(
                   padding: const EdgeInsets.all(20),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(24)),
+                  ),
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
                             "Total:",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                              fontSize: 18,
                             ),
                           ),
                           Text(
                             rupiah.format(cart.totalPrice),
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                              fontSize: 18,
                             ),
                           ),
                         ],
@@ -93,17 +166,14 @@ class CartPage extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: cart.items.isEmpty
-                              ? null
-                              : () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          const CheckoutPage(),
-                                    ),
-                                  );
-                                },
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const CheckoutPage(),
+                              ),
+                            );
+                          },
                           child: const Text("Checkout"),
                         ),
                       )
@@ -112,6 +182,48 @@ class CartPage extends StatelessWidget {
                 )
               ],
             ),
+    );
+  }
+
+  Widget _buildEmptyState(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.remove_shopping_cart,
+              size: 90,
+              color: Colors.grey,
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "Yahh, keranjang kamu kosong 😔",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              "Yuk tambahkan produk ke keranjang 🤗",
+              style: TextStyle(color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Lanjut Belanja"),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
